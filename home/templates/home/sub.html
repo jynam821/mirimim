@@ -1,0 +1,35 @@
+{% extends 'base1.html' %}
+{% block title %}subject{% endblock %}
+{% block content %}
+{%load static%}
+<script>
+{% if attend != None %}
+alert("수업이 추가되었습니다.");
+{% endif %}
+</script>
+<center><h3>과목별 클래스</h3></center>
+<a href = ''><img src = "{%static 'img/refresh.png'%}" width="18px"></a>
+{%if user.s_id|slice:"3:" == "T"%}
+<a class = "btn btn-info" href="{%url 'home:addclass'%}" style="color:white; right:0px; position:absolute; margin-top: 10px;">클래스 추가</a>
+{%else%}
+<div style="position: absolute;right:0px;">
+    <form action = '' method = post name = fm>{%csrf_token%}
+        <label>방 번호 : </label>
+        <input type = text name = num id = num >
+        <button class = "btn btn-info" >입장</label>
+    </form>
+</div><br>
+{%endif%}
+<div class='blankdiv' id='blankdiv' style="margin-bottom: 30px;margin-top: 50px;">
+        {%for attend in attends%}
+        <form action = "{%url 'home:class_index' pk=attend.classroom_id%}">
+        <button class="card" type = submit style = "width:100%;margin-top: 30px;">
+            <div class="card-body" style="text-align: left;">
+                <h5 class="card-title">{{attend.class_name}}</h5>
+                <p class="card-text"><a href= "">{{attend.teacher}}</a></p>
+            </div>
+        </button>
+        </form>
+        {%endfor%}
+    </div>
+{% endblock %}

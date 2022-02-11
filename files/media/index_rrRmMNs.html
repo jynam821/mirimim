@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Lesson</title>
+        <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+        <style>
+            /* Basic styling */
+            * {
+                box-sizing: border-box;
+                padding: 0;
+                margin: 0;
+            }
+            div, span, a, li {
+                font-family: "NotoSansCJKkr","나눔바른고딕","NanumBarunGothic","맑은 고딕","Malgun Gothic","Apple Gothic","돋움",Dotum,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+            }
+            body {
+                background: white; /* TODO FIX */
+            }
+            ul {
+                list-style-type: none;
+            }
+            a, a:hover {
+                text-decoration: none;
+            }
+            a {
+                color: black;
+                font-size: 16px;
+                font-weight: 600;
+            }
+            textlogo {
+                font-family: 'Bangers', cursive;
+                font-size: 40px;
+            }
+            .nav a:hover {
+                color: darkgray;
+            }
+            .container .item a:hover .title {
+                color: darkgray;
+            }
+            /* .logo a:hover {
+                text-decoration: none;
+            } */
+            .nav {
+                background: white;
+                padding: 5px 70px;
+                border-bottom: 1px solid rgba(169, 169, 169, 0.1);
+            }
+            .nav .menu {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .nav .menu li.logo {
+                padding: 0px 10px;
+                white-space: nowrap;
+            }
+            .nav .menu li.item {
+                padding: 15px 10px;
+                white-space: nowrap;
+            }
+            .nav .menu .logo {
+                flex: 1;
+            }
+            .nav .menu .item {
+                width: 100px;
+                display: block;
+                text-align: center;
+            }
+            .class-category-div {
+                background: white;
+                padding: 5px 70px;
+                border-bottom: 1px solid rgba(169, 169, 169, 0.1);
+            }
+            .class-category-div .class-category-list {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .class-category-div .class-category-list .item {
+                width: 100px;
+                display: block;
+                padding: 15px 10px;
+                white-space: nowrap;
+                text-align: center;
+            }
+            .class-category-div .class-category-list .item a {
+                color: darkgray;
+            }
+            .class-category-div .class-category-list .item.active a {
+                color: black;
+            }
+            .class-category-div .class-category-list .item a:hover {
+                color: black;
+            }
+            .container {
+                background-color: white;
+                display: flex;
+                flex-wrap: wrap;
+                padding: 15px 70px;
+                justify-content:space-between;
+            }
+            .container .item {
+                width: 250px;
+                margin-top: 20px;
+                border-radius: 4px; 
+                box-shadow: inset 0 0 0 1px rgba(0,0,0,.1);
+            }
+            .container .item.last-row-fill {
+                height: 0px;
+                visibility: hidden;
+            }
+            .container .item .thumbnail {
+                background-image: url('/images/sample_thumbnail_image.png'); 
+                width:100%; 
+                padding-top: 75%; 
+                background-position: center; 
+                border-radius: 4px; 
+                box-shadow: inset 0 0 0 1px rgba(0,0,0,.1); 
+                background-size: cover;
+            }
+            .container .item .title {
+                height: 50px;
+                padding: 10px 10px 0px 10px;
+                text-align: start;
+                overflow: hidden;
+            }
+            .container .item .content {
+                display: flex;
+                flex-direction: row;
+                padding: 0px 10px 10px 10px;
+            }
+            .container .item .content .profile {
+                width: 45px;
+            }
+            .container .item .content .profile .image {
+                background-image: url('/images/sample_profile_image.png'); 
+                width:100%; 
+                padding-top: 100%; 
+                background-position: center; 
+                border-radius: 50%; 
+                box-shadow: inset 0 0 0 1px rgba(0,0,0,.1); 
+                background-size: cover;
+            }
+            .container .item .content .profile .name {
+                width: 100%;
+                margin-top: 5px;
+                text-align: center;
+                font-size: 12px;
+                font-weight: 400;
+            }
+            .container .item .content .description {
+                flex: 1;
+            }
+            .container .item .content .description div {
+                margin-top: 5px;
+            }
+            .container .item .content .description .title span {
+                color: #333;
+                font-size: 18px; 
+                font-weight: 600;
+                margin: 5px 0px;
+            }
+            .container .item .content .description span {
+                color: #999;
+                font-size: 14px; 
+                font-weight: 400;
+            }
+            .page-list-div {
+                background: white;
+                padding: 5px 70px;
+            }
+            .page-list-div .page-list {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .page-list-div .page-list .item {
+                width: auto;
+                display: block;
+                padding: 15px 10px;
+                white-space: nowrap;
+                text-align: center;
+            }
+            .page-list-div .page-list .item a {
+                color: darkgray;
+            }
+            .page-list-div .page-list .item span {
+                color: darkgray;
+            }
+            .page-list-div .page-list .item.active a {
+                color: black;
+            }
+            .page-list-div .page-list .item a:hover {
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="nav">
+            <ul class="menu">
+              <li class="logo"><a href="#"><textlogo>Lesson</textlogo></a></li>
+              <li class="item"><a href="#">레슨</a></li>
+              <li class="item"><a href="#">서비스소개</a></li>
+              <li class="item"><a href="#">튜터등록</a></li>
+              <li class="item"><a href="#">회원가입</a></li>
+              <li class="item"><a href="#">로그인</a></li>
+            </ul>
+        </div>
+        <div class="class-category-div">
+            <ul class="class-category-list">
+              <li class="item active"><a href="#">외국어</a></li>
+              <li class="item"><a href="#">디자인</a></li>
+              <li class="item"><a href="#">영상</a></li>
+              <li class="item"><a href="#">뷰티</a></li>
+              <li class="item"><a href="#">프로그래밍</a></li>
+            </ul>
+        </div>
+        <div id="lesson-list-div" class="container">
+            <div class="item last-row-fill"></div>
+            <div class="item last-row-fill"></div>
+        </div>
+        <div class="page-list-div">
+            <ul class="page-list">
+                <li class="item active"><a href="#">1</a></li>
+                <li class="item"><a href="#">2</a></li>
+                <li class="item"><a href="#">3</a></li>
+                <li class="item"><a href="#">4</a></li>
+                <li class="item"><a href="#">5</a></li>
+                <li class="item"><a href="#">6</a></li>
+                <li class="item"><a href="#">7</a></li>
+                <li class="item"><a href="#">8</a></li>
+                <li class="item"><a href="#">9</a></li>
+                <li class="item"><a href="#">10</a></li>
+                <li class="item"><span>|</span></li>
+                <li class="item"><a href="#">다음</a></li>
+            </ul>
+        </div>
+        <div class="footer">
+
+        </div>
+       	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+       	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"></script>
+       	<script id="lesson-list-item-template" type="text/x-handlebars-template">
+			{{#lessonList}}
+			<div class="item">
+                <a href="#">
+                    <div class="thumbnail"></div>
+                    <div class="title"><span>3시간만에 끝내는 영어회화 공부법! 앞으론 '이것'만 하자!</span></div>
+                    <div class="content">
+                        <div class="description">
+                            <div><span>서울</span></div>
+                            <div><span>10,000명 참여</span></div>
+                            <div><span style="color: orange;">★★★★★</span>&nbsp;<span>(리뷰 100)</span></div>
+                        </div>
+                        <div class="profile">
+                            <div class="image"></div>
+                            <div class="name"><span>손성은</span></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+			{{/lessonList}}
+		</script>
+       	<script>
+       		var lessonListItemTemplate;
+       	
+       		$(document).ready(function() {
+       			var source = $("#lesson-list-item-template").html();
+       			lessonListItemTemplate = Handlebars.compile(source);
+       			
+       			$.get("/api/v1/lessons",{size:"10"})
+       				.done(function(data) {
+       					var lessonList = data;
+       	       			var resultHtml = template( {"lessonList":lessonList} );
+       	       			
+       	       			$("#lesson-list-div").prepend(resultHtml);
+       				})
+       				.fail(function(xhr, status, errorThrown) { 
+       					console.log(errorThrown + " / " + status);
+       				});
+       		});
+       	</script>
+    </body>
+</html>

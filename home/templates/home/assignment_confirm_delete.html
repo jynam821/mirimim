@@ -1,0 +1,14 @@
+{% extends 'base1.html' %}
+
+{% block title %}Confirm Delete{% endblock %}
+
+{% block content %}
+<center>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div>삭제하시겠습니까?{{ bookmark }}</div>
+    <button type="submit" class="btn btn-danger btn-sm">확인</button>
+    <button onclick="history.back()" class="btn btn-info btn-sm">취소</button>
+    </form>
+</center>  
+{% endblock %}

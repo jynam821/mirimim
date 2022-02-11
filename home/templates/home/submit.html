@@ -1,0 +1,19 @@
+{% extends 'base1.html' %}
+{% block title %}제출하기{% endblock %}
+{% block content %}
+{% load static %}
+<!-- Container -->
+<div id="container">
+<a href = javascript:history.go(-1)><img src = "{%static 'img/back.png'%}" width="20px"></a>
+<a href = "{% url 'home:ban'%}"><img src = "{%static 'img/home.png'%}" width="20px"></a>
+<a href = ''><img src = "{%static 'img/refresh.png'%}" width="18px"></a>
+<h1>{{notice.title}}</h1>
+<h7>제출시간 : {{notice.submit_at|date:"Y년 m월 d일 H시 m분"}}까지</h7>
+<div style="margin-top:50px;">
+    <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <input type="file" class="vTextField" name =upload_file id="exampleFormControlFile1" multiple value=" ">
+        <input type="submit" value="작성완료" class="default" name="_save">
+    </form>
+</div>
+</div>
+{% endblock %}

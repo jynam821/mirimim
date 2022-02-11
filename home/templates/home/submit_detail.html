@@ -1,0 +1,19 @@
+{% extends 'base1.html' %}
+{% block content %}
+{%load static%}
+<a href = "javascript:history.go(-1)"><img src = "{%static 'img/back.png'%}" width="20px"></a>
+<a href = "{% url 'home:ban'%}"><img src = "{%static 'img/home.png'%}" width="20px"></a>
+<a href = ''><img src = "{%static 'img/refresh.png'%}" width="18px"></a>
+{{notice.title}}
+{%for file in file_urls%}
+    <a href={{file}} download><img src = "{% static 'img/file.png' %}" style="margin-right:5px;" width=10px>{{file|slice:"7:"}}</a><br>
+{%empty%}없음
+{%endfor%}
+제출시간 : {{submit.updated_at}}
+{{request.session.email}}
+{{submit.email}}
+{%if submit.email == request.session.email%}
+    <a class = "btn btn-success" href="{% url 'home:submit_update' pk=submit.assignment_id %}" style="color:white;">수정하기</a>
+    <a class = "btn btn-danger" href="{% url 'home:submit_delete' pk=submit.assignment_id %}" style="color:white;">제출취소</a>
+{%endif%}
+{% endblock %}

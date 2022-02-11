@@ -1,0 +1,99 @@
+{%load static%}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+      <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link href="{% static 'css/signup.css'%}">
+<script src = "{% static 'js/signup.js'%}"></script>
+<body>
+   <div class="container">
+       <div class="row">
+        <div class="col-md-5 mx-auto">
+            <div id="second">
+               <div class="myform form ">
+                     <div class="logo mb-3">
+                        <div class="col-md-12 text-center">
+                           <h1 >Signup</h1>
+                        </div>
+                     </div>
+                     <form action="{%url 'account:signup'%}" name="registration" method="post" id = fm>{% csrf_token %}
+                        <div class="form-group">
+                           <label for="exampleInputEmail1">Name</label>
+                           <input type="text" name="name" id="name"  class="form-control" aria-describedby="emailHelp" placeholder="Enter Name">
+                        </div>
+                        <label for="exampleInputEmail1">Email address</label>
+                        <div class="form-group form-inline">
+                           <input type="text" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                           <label for="exampleInputEmail1">@e-mirim.hs.kr</label>
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleInputEmail1">Password</label>
+                           <input type="password" name="password" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
+                           <input type=hidden name = "chk" id = "chk" value="0" > 
+                        </div>
+                        <div id=teacher onclick="tors(1)">
+                           <u>선생님이신가요?</u>
+                        </div>
+                        <div id=student onclick="tors(2)" style="display: none;">
+                           <u>학생이신가요?</u>
+                        </div>
+                        <label id = t style="display:none;margin-top: 40px;">담임 선생님이 아니시라면,<br> 학년/반 해당사항 없음을 선택해주세요.</label>
+                        <div class="form-group">
+                           <label for="exampleInputEmail1">Grade</label>
+                           <select class=”form-control“ name = grade >
+                              <option value = 1 selected>1</option>
+                              <option value = 2>2</option>
+                              <option value = 3>3</option>
+                              <option value="0" >해당사항 없음</option>
+                           </select>
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleInputEmail1">Class</label>
+                           <select class=”form-control“ name = ban >
+                              {% load filters %}
+                              {% for value in 7|ranges %}
+                              <option value = {{value}}>{{ value }}</option>
+                              {% endfor %}
+                              <option value="0" >해당사항 없음</option>
+                           </select>
+                        </div>
+                        
+                        <div class="form-group" id = student_number>
+                           <label for="exampleInputEmail1">number</label>
+                           <select class='form-control'  name = student_number>
+                              {% load filters %}  //파일명
+                              {% for value in 21|ranges %}
+                                 {% if value < 10 %}
+                                 <option value = "0{{value}}">{{ value }}</option>
+                                 {%else%}
+                                 <option value = "{{value}}">{{ value }}</option>
+                                 {%endif%}
+                              {% endfor %}
+                           </select>
+                        </div>
+                        <div class="form-group" id = teacher_number style="display: none;">
+                           <label for="exampleInputEmail1">subject</label>
+                           <select class='form-control' name = teacher_number>
+                              {% for subject in subjects %}
+                              <option value = "{{subject.sbj_code}}T">{{ subject.sbj_name }}</option>
+                              {% endfor %}
+                           </select>
+                        </div>
+                        <div class="col-md-12 text-center mb-3">
+                           <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Get Start</button>
+                        </div>
+                        <div class="col-md-12 ">
+                           <div class="form-group">
+                              <p class="text-center"><a href="{%url 'account:signin'%}" id="signin">Already have an account?</a></p>
+                           </div>
+                        </div>
+                        </div>
+                     </form>
+                  </div>
+            </div>
+         </div>
+      </div>
+      </body>   

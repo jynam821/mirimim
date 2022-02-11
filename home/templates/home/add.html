@@ -1,0 +1,32 @@
+{% extends 'form.html' %}
+
+{% block title %}subject{% endblock %}
+{%block h1%}Add notice{%endblock%}</h1>
+{%block assignment%}
+<button id = yes onclick="st(0);" style="margin-bottom: 20px;" class = "btn btn-sm btn-outline-info">제출할 과제가 있어요</button>
+<button id = no onclick="st(1);" style="display: none; margin-bottom: 20px;" class = "btn btn-sm btn-outline-info">제출할 과제가 없어요</button>
+{%endblock%}
+{%block classroom_id%}
+<select class="custom-select custom-select-sm mb-2" name = classroom_id>
+    <option selected>Open this select menu</option>
+    {%if user.s_id|slice:"3:" == "T"%}<option value="-1">전체 공지</option>{%endif%} <!--선생님만 전체공지 가능-->
+    {% for attend in attends %}
+    <option value="{{attend.classroom_id}}">{{attend.class_name}}</option>
+    {% endfor %}
+</select>    
+{%endblock%}                               
+{%block id_title%}
+<input type="text" name="title" class="vTextField" maxlength="50" required="" id="id_title">
+{%endblock%}
+{%block id_content%}
+<textarea name="content" cols="40" rows="10" class="vLargeTextField" maxlength="500" required="" name = content id="id_content"></textarea>                                   
+{%endblock%}
+{%block submit_at%}
+<input class="vTextField" type="datetime-local" id="submit_at" name="submit_at" >
+{%endblock%}
+{%block file%}
+<input type="file" class="vTextField" name =upload_file id="exampleFormControlFile1" multiple value=" ">
+{% endblock %}
+{%block submit%}
+<input type="submit" value="작성완료" class="default" name="_save">
+{%endblock%}

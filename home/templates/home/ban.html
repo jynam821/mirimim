@@ -1,0 +1,54 @@
+{% extends 'base1.html' %}
+{% block title %}{{user.s_id|slice:"1"}}-{{user.s_id|slice:"1:2"}}{% endblock %}
+{% block content %}
+{%load static%}
+</script>
+<center><h3>{{user.s_id|slice:"1"}}-{{user.s_id|slice:"1:2"}}</h3></center>
+    <a href = ''><img src = "{%static 'img/refresh.png'%}" width="18px"></a>
+    <div class='blankdiv' id='blankdiv' style="margin-bottom: 30px;">
+        {%for notice in notices%}
+        {%if notice.submit_at|date:"Ymd" == today %}
+        <form action = "{% url 'home:detail' pk=notice.notice_id %}">
+        <button type = submit class="card" style = "width:100%;margin-top: 30px; background-color:rgb(247, 222, 225);" >
+        {%else%}
+        <button class="card" type = submit style = "width:100%;margin-top: 30px;">
+        {%endif%}
+        <label style="position: absolute; right: 15px; bottom:0px; text-align: right;">
+            {%if notice.submit_at is not None%}
+            {%for submit in submits%}
+            {%if notice.notice_id == submit.notice_id%}
+            <font size=1 color=gray>제출함</font>
+            {%endif%}
+            {%endfor%}
+            {%endif%}
+        <br>{{notice.name}}
+        </label>
+            <div class="card-body" style="text-align: left;">
+            {%if notice.s_id|slice:"3:" == "T"%}<h7 style="color:red;">선생님 글입니다.</h7>{%endif%}
+            {%if notice.scope == -1 %}<h7 style="color:darkgray;position:absolute;right:10px;top:3px;">전체공지</h7>{%endif%}
+            <h5 class="card-title">{{notice.title}}</h5>
+            <p class="card-text">{{notice.content|slice:":30"}}<a href= "{% url 'home:detail' pk=notice.notice_id %}">...더보기</a></p>
+        </button>
+        </form>
+        </div>
+
+        {%endfor%}
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+    $.ajax({
+        type : "GET",
+        url : "",
+        error : function() {
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
+        },
+        success : function(data) {
+            $('#blankdiv').html(data);
+        }
+        
+ 
+    });
+</script>
+{% endblock %}

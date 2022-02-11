@@ -1,0 +1,23 @@
+<html>
+<body>
+<head>
+<script>
+    $("#mydiv").scrollTop($("#mydiv")[0].scrollHeight);
+</script>
+</head>
+<div style="position:absolute;right:100px;height:80px;bottom:100px;">
+    <div class=mydiv id = mydiv style="margin-bottom: 40px;">
+    {%for refer in refers%}
+    <div>{{refer.name}}:{{refer.content}}</div><br>
+    {%endfor%}
+    </div><br>
+    <div style="position:fixed;bottom:20px;right:30px;">
+        <form action ='' method = post>
+            <input type=text name=content><button type = submit>작성</button>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
+

@@ -1,0 +1,54 @@
+{% extends 'form.html' %}
+
+{% block title %}subject{% endblock %}
+{%load static%}
+{%block h1%}{{notice.title}}{%endblock%}</h1>
+{%block assignment%}
+&nbsp;작성시간:{{notice.created_at|date:"Y년 m월 d일 H시 i분"}}<p>
+{%endblock%}
+{%block classroom_id%}
+    {% for attend in attends %}
+    {%if notice.scope == -1 %}
+    전체 공지
+    {% elif attend.classroom_id == notice.classroom_id %}
+    {{attend.class_name}}
+    {% endif %}
+    {% endfor %}
+{%endblock%}                               
+{%block id_title%}
+{{notice.title}}
+{%endblock%}
+{%block id_content%}
+{{notice.content}}
+{%endblock%}
+{%block submit_at%}
+{%if notice.submit_at is not None %}
+<script>submit_div.style.display = 'flex';</script>
+{%endif%}
+{{notice.submit_at|date:"Y년 m월 d일 H시 i분"}}
+{%endblock%}
+{%block file%}
+{%for file in file_urls%}
+    <a href={{file}} download><img src = "{% static 'img/file.png' %}" style="margin-right:5px;" width=10px>{{file|slice:"7:"}}</a><br>
+{%empty%}없음
+{%endfor%}
+{% endblock %}
+{%block submit%}
+<div style="position: absolute; right: 30px; width:50%">
+{%if notice.submit_at is not None and notice.email != user.email%}
+<a class = "btn btn-info" href="{% url 'home:submit' pk=notice.notice_id %}" style="color:white;">제출하기</a>
+{%else%}
+{%if notice.submit_at is not None%}
+<a class = "btn btn-info" href="{% url 'home:submitlists' pk=notice.notice_id %}" style="color:white;">제출명단</a>
+{%endif%}
+{%endif%}
+<iframe width="100%" height = 150px style="border:none;margin-top:50px;" src = "{% url 'home:refer' pk=notice.notice_id%}"></iframe>
+{%if notice.email == request.session.email%}
+    <div style="position: absolute; bottom:0px;right:30px;">
+    <a class = "btn btn-success" href="{% url 'home:update' pk=notice.notice_id %}" style="color:white;">수정하기</a>
+    <a class = "btn btn-danger" href="{% url 'home:delete' pk=notice.notice_id %}" style="color:white;">삭제하기</a>
+    </div>
+{%endif%}
+</div>
+
+{%endblock%}
